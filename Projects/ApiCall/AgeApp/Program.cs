@@ -4,29 +4,34 @@ namespace AgeApp
 {
     internal class Program
     {
-        static async void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            string nameInput;
-            Name result;
-
             Console.WriteLine("Welcome to Agify console interface");
+            Console.WriteLine("Enter a name to find the predicted age, or 'quit' to exit.");
 
-            Console.WriteLine("Enter the name of the person you'd like to find the age of");
-
-            do
+            while (true)
             {
-                nameInput = Console.ReadLine();
+                Console.Write("\nEnter name: ");
+                string nameInput = Console.ReadLine();
+
+                Console.Write("\nEnter Country code: ");
+                string countryInput = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(nameInput) || nameInput.Equals("quit"))
+                    break;
 
                 try
                 {
-                    result = await Agify.Age()
+                    Name result = await Agify.Age(nameInput);
+                    Console.WriteLine($"Name: {result.name}, Predicted Age: {result.age}, Count: {result.count}");
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    Console.WriteLine($"Error fetching age: {ex.Message}");
                 }
             }
-            while (true);
+
+            Console.WriteLine("Goodbye!");
         }
     }
 }

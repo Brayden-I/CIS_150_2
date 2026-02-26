@@ -17,14 +17,21 @@ namespace AgifyApi
         public string country_id { get; set; }
     }
 
-    internal class Agify
+    public class Agify
     {
-        static async Task<Name> Age(string name, string country = "US") // Use US as a default localization
+        public static async Task<Name> Age(string name, string country = null) // Use US as a default localization
         {
             try
             {
+                string url = $"https://api.agify.io?name={name}";
+
+                if (country != null)
+                {
+                    url += $"&country_id={country}";
+                }
+
                 using HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync($"https://api.agify.io?name={name}&country_id={country}");
+                HttpResponseMessage response = await client.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
                 {
