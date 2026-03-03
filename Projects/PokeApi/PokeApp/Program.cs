@@ -25,10 +25,17 @@ namespace PokeApp
                         continue;
 
                     default:
-                        input = Console.ReadLine();
                         pokemon = await Pokedex.Search(input);
 
-                        pokemon.Print();
+                        if (pokemon != null)
+                        {
+                            pokemon.Print();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Pokemon not found. Did you misspell?");
+                        }
+                        
                         break;
                 }
 

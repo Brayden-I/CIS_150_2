@@ -11,12 +11,12 @@ namespace PokeApi
     public class Pokemon
     {
         // FIELDS
-        public int id;
-        public string name;
-        public int height;
-        public int weight;
+        public int id { get; set; }
+        public string name { get; set; }
+        public int height { get; set; }
+        public int weight { get; set; }
 
-        // Methods
+        // METHODS
 
         // print
         public void Print()
